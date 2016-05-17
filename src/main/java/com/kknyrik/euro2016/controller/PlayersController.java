@@ -1,12 +1,14 @@
 package com.kknyrik.euro2016.controller;
 
 import com.kknyrik.euro2016.players.model.Player;
-import com.kknyrik.euro2016.config.URLConstants;
 import com.kknyrik.euro2016.players.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Created by Katerina.Knyrik on 5/12/16.
@@ -15,34 +17,29 @@ import java.util.*;
 @RequestMapping(value = "/players")
 public class PlayersController {
 
-    private PlayerService playerService;
+    private final PlayerService playerService;
 
     @Autowired
     public PlayersController(PlayerService playerService) {
         this.playerService = playerService;
     }
 
-    @RequestMapping(URLConstants.GET_ALL_PLAYERS)
-    @ResponseBody
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<Player> getAllPlayers() {
         return playerService.getAllPlayers();
     }
 
-    @RequestMapping(URLConstants.GET_PLAYER)
-    @ResponseBody
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public Player getById(@PathVariable int id) {
         return playerService.getPlayer(id);
     }
 
-    @RequestMapping(value=URLConstants.ADD_PLAYER, method=RequestMethod.POST)
-    @ResponseBody
-    public String addPlayer(Player player) {
-        playerService.addPlayer(player);
-        return "Saved player: " + player.toString();
+    @RequestMapping(value= "/add/{id}&{name}&{team}", method=RequestMethod.POST)
+    public boolean addPlayer(Player player) {
+        return playerService.addPlayer(player);
     }
 
-    @RequestMapping(URLConstants.DELETE_PLAYER)
-    @ResponseBody
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public boolean deleteById(@PathVariable int id) {
         return playerService.deletePlayer(id);
     }

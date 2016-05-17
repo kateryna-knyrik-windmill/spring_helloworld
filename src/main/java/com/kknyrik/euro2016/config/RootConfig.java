@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.kknyrik.euro2016", includeFilters = @ComponentScan.Filter({
-        Configuration.class }))
+@ComponentScan(basePackages = "com.kknyrik.euro2016")
 public class RootConfig {
+
 }

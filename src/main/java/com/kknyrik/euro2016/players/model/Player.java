@@ -1,14 +1,17 @@
 package com.kknyrik.euro2016.players.model;
 
-import java.io.Serializable;
+import org.hibernate.annotations.Entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by Katerina.Knyrik on 5/12/16.
  */
-public class Player implements Serializable{
-
-    private static final long serialVersionUID = -7788619177798333712L;
-
+@Entity
+public class Player{
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String team;
