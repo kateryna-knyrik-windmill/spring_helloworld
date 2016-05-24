@@ -1,31 +1,25 @@
 package com.kknyrik.euro2016.players.service;
 
+import com.kknyrik.euro2016.dao.PlayersDao;
 import com.kknyrik.euro2016.players.model.Player;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Katerina.Knyrik on 5/12/16.
- */
 
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
-    ArrayList<Player> playerArrayList = new ArrayList<Player>();
-    {
-        playerArrayList.add(new Player(0, "first", "firstTeam"));
-        playerArrayList.add(new Player(1, "second", "secondTeam"));
-        playerArrayList.add(new Player(2, "third", "thirdTeam"));
-    }
+    @Autowired
+    PlayersDao playersDao;
 
     /**
      *
      * @return list of players
      */
     public List<Player> getAllPlayers() {
-        return this.playerArrayList;
+        return playersDao.getAll(Player.class);
     }
 
     /**
@@ -34,28 +28,25 @@ public class PlayerServiceImpl implements PlayerService {
      * @return player by id
      */
     public Player getPlayer(int id) {
-        if(playerArrayList.size() <= id)
-            return this.playerArrayList.get(id);
-        return new Player();
+        return this.playersDao.find(id);
     }
+
 
     /**
      *
      * @param player
-     * @return boolean value is player was added
+     *
      */
-    public boolean addPlayer(Player player) {
-        return this.playerArrayList.add(player);
+    public void addPlayer(Player player) {
+        this.playersDao.add(player);
     }
 
     /**
      *
      * @param id player id
-     * @return boolean value is player was deleted
+     * @return
      */
-    public boolean deletePlayer(int id) {
-        if(this.playerArrayList.contains(getPlayer(id))){
-            this.playerArrayList.remove(id);
-        } return false;
+    public void deletePlayer(int id) {
+        playersDao.remove(getPlayer(id));
     }
 }

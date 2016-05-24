@@ -3,16 +3,10 @@ package com.kknyrik.euro2016.controller;
 import com.kknyrik.euro2016.players.model.Player;
 import com.kknyrik.euro2016.players.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by Katerina.Knyrik on 5/12/16.
- */
 @RestController
 @RequestMapping(value = "/players")
 public class PlayersController {
@@ -26,6 +20,7 @@ public class PlayersController {
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<Player> getAllPlayers() {
+        System.out.println("get all");
         return playerService.getAllPlayers();
     }
 
@@ -34,14 +29,16 @@ public class PlayersController {
         return playerService.getPlayer(id);
     }
 
-    @RequestMapping(value= "/add/{id}&{name}&{team}", method=RequestMethod.POST)
-    public boolean addPlayer(Player player) {
-        return playerService.addPlayer(player);
+    @RequestMapping(value= "/add", method=RequestMethod.POST)
+    @ResponseBody
+    public void addPlayer(@RequestBody Player player) {
+        System.out.println("add");
+        playerService.addPlayer(player);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public boolean deleteById(@PathVariable int id) {
-        return playerService.deletePlayer(id);
+    public void deleteById(@PathVariable int id) {
+        playerService.deletePlayer(id);
     }
 
 }

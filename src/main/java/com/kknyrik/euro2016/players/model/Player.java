@@ -1,57 +1,69 @@
 package com.kknyrik.euro2016.players.model;
 
-import org.hibernate.annotations.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.kknyrik.euro2016.teams.model.Team;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-/**
- * Created by Katerina.Knyrik on 5/12/16.
- */
 @Entity
 public class Player{
+
     @Id
-    @GeneratedValue
-    private int id;
-    private String name;
-    private String team;
+    private Integer id;
+    private String firstName;
+    private String lastName;
+    @Column(nullable = false, unique = true)
+    private Integer number;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Team team;
+
+    @JsonBackReference
+    public Team getTeam() {
+        return this.team;
+    }
 
     public Player() {
     }
 
-    public Player(int id, String name, String team) {
-        this.id = id;
-        this.name = name;
-        this.team = team;
-    }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getTeam() {
-        return team;
-    }
-
-    public void setTeam(String team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 
     @Override
     public String toString() {
-        return "Player [id= " + id + ",  name=" + name + ", team=" + team + "]";
+        return "Player [id= " + id + ",  firstName=" + firstName +  "]";
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 }
