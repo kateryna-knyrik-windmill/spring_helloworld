@@ -1,7 +1,7 @@
 package com.kknyrik.euro2016.dao;
 
 
-import com.kknyrik.euro2016.teams.model.Team;
+import com.kknyrik.euro2016.model.Team;
 import org.springframework.stereotype.Repository;
 
 @Repository

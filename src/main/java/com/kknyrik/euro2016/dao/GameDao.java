@@ -1,6 +1,6 @@
 package com.kknyrik.euro2016.dao;
 
-import com.kknyrik.euro2016.games.model.Game;
+import com.kknyrik.euro2016.model.Game;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,7 +1,7 @@
 package com.kknyrik.euro2016.controller;
 
-import com.kknyrik.euro2016.players.model.Player;
-import com.kknyrik.euro2016.players.service.PlayerService;
+import com.kknyrik.euro2016.model.Player;
+import com.kknyrik.euro2016.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,6 @@ public class PlayersController {
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<Player> getAllPlayers() {
-        System.out.println("get all");
         return playerService.getAllPlayers();
     }
 
@@ -30,9 +29,7 @@ public class PlayersController {
     }
 
     @RequestMapping(value= "/add", method=RequestMethod.POST)
-    @ResponseBody
-    public void addPlayer(@RequestBody Player player) {
-        System.out.println("add");
+    public @ResponseBody void addPlayer(@RequestBody Player player) {
         playerService.addPlayer(player);
     }
 

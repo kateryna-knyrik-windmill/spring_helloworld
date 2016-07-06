@@ -13,10 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-/**
- * Created by Katerina.Knyrik on 5/17/16.
- */
-
 @Configuration
 @EnableTransactionManagement
 public class PersistenceConfig {
@@ -43,7 +39,7 @@ public class PersistenceConfig {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("com.kknyrik.euro2016.players.model", "com.kknyrik.euro2016.teams.model");
+        factory.setPackagesToScan("com.kknyrik.euro2016.model");
         factory.setDataSource(dataSource());
         factory.afterPropertiesSet();
         return factory.getObject();
